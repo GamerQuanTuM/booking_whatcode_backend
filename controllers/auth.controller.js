@@ -34,7 +34,6 @@ export const login = async (req, res) => {
     const user = await loginUser({ email, password });
 
     const token = jwt.sign({ userId: user.id }, secret, { expiresIn: "1h" });
-
     const { password: Password, ...userWithoutPassword } = user;
 
     res.status(200).json({ user: userWithoutPassword, token });
@@ -42,4 +41,3 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "An error occurred during login", error });
   }
 };
-
